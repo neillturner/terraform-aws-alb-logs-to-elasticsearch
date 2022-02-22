@@ -19,7 +19,7 @@ resource "aws_lambda_function" "alb_logs_to_elasticsearch_vpc" {
 
   tags = merge(
             var.tags,
-            map("Scope", "${var.prefix}lambda_function_to_elasticsearch"),
+            tomap({"Scope" = "${var.prefix}lambda_function_to_elasticsearch"}),
             )
 
   # This will be a code block with empty lists if we don't create a securitygroup and the subnet_ids are empty.
@@ -61,7 +61,7 @@ resource "aws_lambda_function" "alb_logs_to_elasticsearch" {
 
   tags = merge(
             var.tags,
-            map("Scope", "${var.prefix}lambda_function_to_elasticsearch"),
+            tomap({"Scope" = "${var.prefix}lambda_function_to_elasticsearch"}),
             )
 }
 
