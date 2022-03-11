@@ -19,7 +19,7 @@ Particularly it creates:
 | index |  `alblogs` | Index to create. adds a timestamp to index. Example: alblogs-2016.03.31` | `alblogs` | False |
 | doctype  | `alb-access-logs` | doctype | `alb-access-logs` |  False |
 | region | `eu-west-1` | AWS region | `eu-west-1` |  False |
-| nodejs_version | `8.10` | Nodejs version to be used | `8.10` |  False |
+| nodejs_version | `16.x` | Nodejs version to be used | `16.x` |  False |
 | prefix | `public-` | A prefix for the resource names, this helps create multiple instances of this stack for different environments | | False |
 | s3_bucket_arn | alb-logs | The arn of the s3 bucket containing the alb logs | `None` | True |
 | s3_bucket_id | alb-logs | The id of the s3 bucket containing the alb logs | `None` | True |
@@ -34,7 +34,7 @@ provider "aws" {
 
 module "public_alb_logs_to_elasticsearch" {
   source        = "neillturner/alb-logs-to-elasticsearch/aws"
-  version       = "0.1.0"
+  version       = "0.2.2"
 
   prefix        = "public_es_"
   es_endpoint   = "test-es-XXXXXXX.eu-central-1.es.amazonaws.com"
@@ -44,7 +44,7 @@ module "public_alb_logs_to_elasticsearch" {
 
 module "vpc_alb_logs_to_elasticsearch" {
   source        = "neillturner/alb-logs-to-elasticsearch/aws"
-  version       = "0.1.0"
+  version       = "0.2.2"
 
   prefix        = "vpc_es_"
   es_endpoint   = "vpc-gc-demo-vpc-gloo5rzcdhyiykwdlots2hdjla.eu-central-1.es.amazonaws.com"
