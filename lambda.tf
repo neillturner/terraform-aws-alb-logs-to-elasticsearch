@@ -47,7 +47,7 @@ resource "aws_lambda_function" "alb_logs_to_elasticsearch" {
   timeout          = 300
   runtime          = "nodejs${var.nodejs_version}"
   role             = aws_iam_role.role.arn
-  handler          = "exports.handler"
+  handler          = "index.handlers"
   source_code_hash = filebase64sha256("${path.module}/alb-logs-to-elasticsearch.zip")
 
 
