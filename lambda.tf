@@ -14,13 +14,14 @@ resource "aws_lambda_function" "alb_logs_to_elasticsearch_vpc" {
       es_endpoint = var.es_endpoint
       index       = var.index
       doctype     = var.doctype
+      region      = var.region
     }
-  }  
+  }
 
   tags = merge(
-            var.tags,
-            tomap({"Scope" = "${var.prefix}lambda_function_to_elasticsearch"}),
-            )
+    var.tags,
+    tomap({ "Scope" = "${var.prefix}lambda_function_to_elasticsearch" }),
+  )
 
   # This will be a code block with empty lists if we don't create a securitygroup and the subnet_ids are empty.
   # When these lists are empty it will deploy the lambda without VPC support.
@@ -56,13 +57,14 @@ resource "aws_lambda_function" "alb_logs_to_elasticsearch" {
       es_endpoint = var.es_endpoint
       index       = var.index
       doctype     = var.doctype
+      region      = var.region
     }
   }
 
   tags = merge(
-            var.tags,
-            tomap({"Scope" = "${var.prefix}lambda_function_to_elasticsearch"}),
-            )
+    var.tags,
+    tomap({ "Scope" = "${var.prefix}lambda_function_to_elasticsearch" }),
+  )
 }
 
 resource "aws_lambda_permission" "allow_terraform_bucket" {
