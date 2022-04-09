@@ -13,17 +13,17 @@ Particularly it creates:
 ## Module Input Variables
 
 
-| Variable Name | Example Value | Description | Default Value | Required |
-| --- | --- | --- | --- |  --- |
-| es_endpoint | search-es-demo-zveqnhnhjqm5flntemgmx5iuya.eu-west-1.es.amazonaws.com  | AWS ES fqdn without http:// | `None` | True |
-| index |  `alblogs` | Index to create. adds a timestamp to index. Example: alblogs-2016.03.31` | `alblogs` | False |
-| doctype  | `alb-access-logs` | doctype | `alb-access-logs` |  False |
-| region | `eu-west-1` | AWS region | `eu-west-1` |  False |
-| nodejs_version | `16.x` | Nodejs version to be used | `16.x` |  False |
-| prefix | `public-` | A prefix for the resource names, this helps create multiple instances of this stack for different environments | | False |
-| s3_bucket_arn | alb-logs | The arn of the s3 bucket containing the alb logs | `None` | True |
-| s3_bucket_id | alb-logs | The id of the s3 bucket containing the alb logs | `None` | True |
-| subnet_ids | `["subnet-1111111", "subnet-222222"]` | Subnet IDs you want to deploy the lambda in. Only fill this in if you want to deploy your Lambda function inside a VPC. | | False |
+| Variable Name  | Example Value                                                        | Description                                                                                                             | Default Value     | Required |
+|----------------|----------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|-------------------|----------|
+| es_endpoint    | search-es-demo-zveqnhnhjqm5flntemgmx5iuya.eu-west-1.es.amazonaws.com | AWS ES fqdn without http://                                                                                             | `None`            | True     |
+| index          | `alblogs`                                                            | Index to create. adds a timestamp to index. Example: alblogs-2016.03.31`                                                | `alblogs`         | False    |
+| doctype        | `alb-access-logs`                                                    | doctype                                                                                                                 | `alb-access-logs` | False    |
+| region         | `eu-west-1`                                                          | AWS region                                                                                                              | `None`            | True     |
+| nodejs_version | `16.x`                                                               | Nodejs version to be used                                                                                               | `14.x`            | False    |
+| prefix         | `public-`                                                            | A prefix for the resource names, this helps create multiple instances of this stack for different environments          |                   | False    |
+| s3_bucket_arn  | alb-logs                                                             | The arn of the s3 bucket containing the alb logs                                                                        | `None`            | True     |
+| s3_bucket_id   | alb-logs                                                             | The id of the s3 bucket containing the alb logs                                                                         | `None`            | True     |
+| subnet_ids     | `["subnet-1111111", "subnet-222222"]`                                | Subnet IDs you want to deploy the lambda in. Only fill this in if you want to deploy your Lambda function inside a VPC. |                   | False    |
 
 ## Example
 
@@ -40,6 +40,7 @@ module "public_alb_logs_to_elasticsearch" {
   es_endpoint   = "test-es-XXXXXXX.eu-central-1.es.amazonaws.com"
   s3_bucket_arn = "arn:aws:s3:::XXXXXXX-alb-logs-eu-west-1"
   s3_bucket_id  = "XXXXXXX-alb-logs-eu-west-1"
+  region        = "eu-west-1"
 }
 
 module "vpc_alb_logs_to_elasticsearch" {
@@ -51,6 +52,7 @@ module "vpc_alb_logs_to_elasticsearch" {
   s3_bucket_arn = "arn:aws:s3:::XXXXXXX-alb-logs-eu-west-1"
   s3_bucket_id  = "XXXXXXX-alb-logs-eu-west-1"
   subnet_ids    = ["subnet-d9990999"]
+  region        = "eu-west-1"
 }
 ```
 
