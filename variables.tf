@@ -15,6 +15,12 @@ variable "index" {
   default     = "alblogs"
 }
 
+variable "lambda_function_filename" {
+  type        = string
+  description = "Filename with the lambda's srouce code"
+  default     = ""
+}
+
 variable "nodejs_version" {
   type = string
   description = "Nodejs version to be used"
