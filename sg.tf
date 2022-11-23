@@ -31,7 +31,7 @@ resource "aws_security_group" "lambda" {
   }
 
   tags = merge(
-            var.tags,
-            tomap({"Scope" = "${var.prefix}lambda_function_to_elasticsearch"}),
-            )
+    var.tags,
+    tomap({ "Scope" = "${var.prefix}lambda_function_to_elasticsearch" }),
+  )
 }

@@ -29,9 +29,9 @@ resource "aws_lambda_function" "alb_logs_to_elasticsearch_vpc" {
     subnet_ids         = var.subnet_ids
     security_group_ids = [aws_security_group.lambda[0].id]
   }
-  
+
   lifecycle {
-    ignore_changes = [ filename ]
+    ignore_changes = [filename]
   }
 }
 
@@ -71,7 +71,7 @@ resource "aws_lambda_function" "alb_logs_to_elasticsearch" {
   )
 
   lifecycle {
-    ignore_changes = [ filename ]
+    ignore_changes = [filename]
   }
 }
 
