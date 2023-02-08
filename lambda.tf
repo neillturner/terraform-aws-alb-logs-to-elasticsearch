@@ -1,13 +1,13 @@
 resource "aws_lambda_function" "alb_logs_to_elasticsearch_vpc" {
   count            = length(var.subnet_ids) > 0 ? 1 : 0
-  filename         = "${path.module}/alb-logs-to-elasticsearch.zip"
+  filename         = local.lambda_function_filename
   function_name    = "${var.prefix}alb-logs-to-elasticsearch"
   description      = "${var.prefix}alb-logs-to-elasticsearch"
   timeout          = 300
   runtime          = "nodejs${var.nodejs_version}"
   role             = aws_iam_role.role.arn
   handler          = "index.handler"
-  source_code_hash = filebase64sha256("${path.module}/alb-logs-to-elasticsearch.zip")
+  source_code_hash = filebase64sha256(local.lambda_function_filename)
 
   environment {
     variables = {
@@ -29,9 +29,9 @@ resource "aws_lambda_function" "alb_logs_to_elasticsearch_vpc" {
     subnet_ids         = var.subnet_ids
     security_group_ids = [aws_security_group.lambda[0].id]
   }
-  
+
   lifecycle {
-    ignore_changes = [ filename ]
+    ignore_changes = [filename]
   }
 }
 
@@ -46,14 +46,14 @@ resource "aws_lambda_permission" "allow_terraform_bucket_vpc" {
 
 resource "aws_lambda_function" "alb_logs_to_elasticsearch" {
   count            = length(var.subnet_ids) == 0 ? 1 : 0
-  filename         = "${path.module}/alb-logs-to-elasticsearch.zip"
+  filename         = local.lambda_function_filename
   function_name    = "${var.prefix}alb-logs-to-elasticsearch"
   description      = "${var.prefix}alb-logs-to-elasticsearch"
   timeout          = 300
   runtime          = "nodejs${var.nodejs_version}"
   role             = aws_iam_role.role.arn
   handler          = "index.handler"
-  source_code_hash = filebase64sha256("${path.module}/alb-logs-to-elasticsearch.zip")
+  source_code_hash = filebase64sha256(local.lambda_function_filename)
 
 
   environment {
@@ -71,7 +71,7 @@ resource "aws_lambda_function" "alb_logs_to_elasticsearch" {
   )
 
   lifecycle {
-    ignore_changes = [ filename ]
+    ignore_changes = [filename]
   }
 }
 

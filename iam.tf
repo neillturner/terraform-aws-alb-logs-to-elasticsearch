@@ -1,6 +1,6 @@
 data "template_file" "policy" {
   template = file("${path.module}/files/es_policy.json")
-  vars     = {
+  vars = {
     s3_bucket_arn = var.s3_bucket_arn
   }
 }
